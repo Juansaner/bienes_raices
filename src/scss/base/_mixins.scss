@@ -29,12 +29,14 @@
     text-decoration: none;
     padding: 1rem 3rem;
     text-align: center;
-    margin-top: $separacion / 2;
+    margin-top: calc($separacion / 2);
     border-radius: 1rem;
     display: $display;
+    border: none;
 
     &:hover {
         background-color: darken($bgColor, 5);
+        cursor: pointer;
     }
 }
 
@@ -44,7 +46,7 @@
     font-weight: $bold;
     padding: 1rem 3rem;
     border-radius: 1rem;
-    margin-top: $separacion / 2;
+    margin-top: calc($separacion / 2);
 
     &:hover{
         background-color: $azulClaro;
