@@ -3,9 +3,17 @@
 }
 
 .boton-azul{
-    @include boton($azul, inline-block)
+    @include boton($azul, inline-block);
 }
 
 .btn-azul {
     @include btn-border;
+}
+
+.boton-rojo-block {
+    @include boton($rojo, block);
+}
+
+.boton-verde-block {
+    @include boton($verde, block);
 }
