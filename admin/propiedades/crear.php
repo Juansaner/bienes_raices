@@ -42,7 +42,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //Asignar files en una variable
     $imagen = $_FILES['imagen'];
-    var_dump($imagen['name']);
 
     if(!$titulo) {
         $errores[] = "Debes añadir un titulo";
@@ -109,7 +108,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($db) {
             //Redireccionar al usuario
-            header('Location: /bienesraices/admin/index.php');
+            header("Location: /bienesraices/admin/index.php?resultado=1");
         }
     }
     
