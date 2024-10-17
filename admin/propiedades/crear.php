@@ -1,4 +1,11 @@
 <?php
+require '../../includes/funciones.php';
+//Verifica si está autenticado
+$auth = estaAutenticado();
+
+if(!$auth) {
+    header('Location: /bienesraices/index.php');
+}
 
 //Base de datos
 require '../../includes/config/database.php';
@@ -21,15 +28,7 @@ $vendedores_id = '';
 
 //Ejecuta el código después de que se envía el formulario
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //echo "<pre>";
-    //var_dump($_POST);
-    //echo "</pre>";
-
-    //echo "<pre>";
-    //var_dump($_FILES);
-    //echo "</pre>";
-
-
+   
     //Sanitizar las entradas
     $titulo = mysqli_real_escape_string( $db, filter_var(htmlspecialchars($_POST['titulo'])));
     $precio = mysqli_real_escape_string( $db, filter_var($_POST['precio'], FILTER_SANITIZE_NUMBER_FLOAT));
@@ -114,7 +113,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 }
 
-require '../../includes/funciones.php';
 incluirTemplate('header');
 ?>
 

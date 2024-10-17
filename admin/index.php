@@ -1,5 +1,13 @@
 <?php
 
+require '../includes/funciones.php';
+//Verifica si está autenticado
+$auth = estaAutenticado();
+
+if(!$auth) {
+    header('Location: /bienesraices/index.php');
+}
+
 //Importar la conexión
 require '../includes/config/database.php';
 $db = conectarDB();
@@ -34,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 //Incluye un template
-require '../includes/funciones.php';
 incluirTemplate('header');
 ?>
 

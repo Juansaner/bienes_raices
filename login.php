@@ -32,6 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $auth = password_verify($password, $usuario['password']);
             if($auth){
                 //El usuario está autenticado
+                session_start();
+
+                //Llenar el arreglo de la sesión
+                $_SESSION['usuario'] = $usuario['email'];
+                $_SESSION['login'] = true;
+                  
+                header('Location: /bienesraices/admin/index.php');
+
             } else {
                 $errores[] = 'El password es incorrecto';
             }
