@@ -1,0 +1,139 @@
+.header {
+    background-color: $grisOscuro;
+    padding: 1rem 0 3rem 0;
+}
+
+.barra {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    @include tablet {
+        align-items: flex-end;
+        align-items: center;
+    }
+}
+
+.navegacion {
+    display: none;
+    @include tablet {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    a {
+        color: $grisOscuro;
+        text-decoration: none;
+        font-size: 2.8rem;
+        display: block;
+        text-align: center;
+        padding: 1.8rem;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: $azul;
+        }
+
+        @include tablet {
+            margin-right: 2rem;
+            font-size: 1.8rem;
+            color: $blanco;
+
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.navegacion-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    @include tablet {
+        flex-direction: row;
+    }
+}
+
+.navegacion-enlaces {
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+        flex-direction: row;
+    }
+}
+
+.navegacion-dark-mode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border-radius: 40px;
+    border: 1px solid;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    @include tablet {
+        border: none;
+    }
+
+    p {
+        color: $grisOscuro;
+        font-weight: bold;
+    }
+}
+
+.dark-mode-boton {
+    width: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    
+    @include tablet {
+        margin: 0 2rem 0 2rem;
+        width: 2rem;
+        filter: invert(100%);
+    }
+}
+
+#dark-mode-texto {
+    @include tablet {
+        display: none;
+    }
+}
+
+/** Navegación mobile **/
+.menu-mobile, 
+.close-menu {
+    max-width: 5rem;
+    @include tablet {
+        display: none;
+    }
+}
+
+.mostrar {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $blanco;
+    padding: 2rem;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
+    width: 50%;
+    height: auto;
+
+    @include tablet {
+        flex-direction: row;
+    }
+}
+
+.close-menu {
+    align-self: flex-end;
+    cursor: pointer;
+}
