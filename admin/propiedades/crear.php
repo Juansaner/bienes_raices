@@ -1,14 +1,13 @@
 <?php
-require '../../includes/funciones.php';
-//Verifica si está autenticado
-$auth = estaAutenticado();
+require '../../includes/app.php';
 
-if(!$auth) {
-    header('Location: /bienesraices/index.php');
-}
+use App\Propiedad;
+
+//Verifica si está autenticado
+estaAutenticado();
+
 
 //Base de datos
-require '../../includes/config/database.php';
 $db = conectarDB();
 
 //Consulta para obtener los vendedores
@@ -94,9 +93,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             mkdir($carpetaImagenes);
         }
         //Generar nombre imagen
-        $nombreImagen = md5(uniqid(rand(), true));
+        $nombreImagen = md5(uniqid(rand(), true) . ".jpg");
         //Subir la imagen 
-        move_uploaded_file($imagen['tmp_name'], $carpetaImagenes .$nombreImagen . '.jpg');
+        move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen . ".jpg" );
         
 
 

@@ -1,0 +1,22 @@
+{
+    "name": "juans/bienesraices",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Juans\\Bienesraices\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Juan Pablo",
+            "email": "juansaner01@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./classes"
+        }
+    }
+}

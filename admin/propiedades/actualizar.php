@@ -109,9 +109,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unlink($carpetaImagenes . $propiedad['imagen'] . ".jpg");
 
             //Generar nombre imagen
-            $nombreImagen = md5(uniqid(rand(), true));
+            $nombreImagen = md5(uniqid(rand(), true) );
+
             //Subir la imagen 
-            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen . '.jpg');
+            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen . ".jpg");
         } else {
             $nombreImagen = $propiedad['imagen'];
         }
