@@ -101,14 +101,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         //Subir la imagen 
         move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen . ".jpg" );
         
-
-
-        //Insertar en la base de datos
-        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion','$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedores_id')";
-
-        $resultado = mysqli_query($db, $query);
-
-        if ($db) {
+        if ($resultado) {
             //Redireccionar al usuario
             header("Location: /bienesraices/admin/index.php?resultado=1");
         }
