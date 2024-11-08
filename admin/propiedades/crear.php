@@ -27,6 +27,10 @@ $vendedores_id = '';
 
 //Ejecuta el código después de que se envía el formulario
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $propiedad = new Propiedad($_POST);
+
+    $propiedad->guardar();
    
     //Sanitizar las entradas
     $titulo = mysqli_real_escape_string( $db, filter_var(htmlspecialchars($_POST['titulo'])));

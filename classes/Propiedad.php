@@ -13,7 +13,7 @@ class Propiedad {
     public $wc;
     public $estacionamiento;
     public $creado;
-    public $vendedor_id;
+    public $vendedores_id;
 
     public function __construct($args = [])
     {
@@ -25,7 +25,11 @@ class Propiedad {
         $this->habitaciones = $args['habitaciones'] ?? '';
         $this->wc = $args['estacionamiento'] ?? '';
         $this->estacionamiento = $args['estacionamiento'] ?? '';
-        $this->creado = $args['creado'] ?? '';
-        $this->vendedor_id = $args['vendedor_id'] ?? '';
+        $this->creado = date('Y/m/d');
+        $this->vendedores_id = $args['vendedores_id'] ?? '';
+    }
+
+    public function guardar() {
+        echo "Guardando en la Base de datos";
     }
 }

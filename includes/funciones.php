@@ -12,7 +12,8 @@ function estaAutenticado(): bool {
 
     if (!$_SESSION['login']) {
         header('Location: /bienesraices/index.php');
-    }  
+    } 
+    return true;
 }
 
 function debuguear($variable) {
@@ -21,3 +22,5 @@ function debuguear($variable) {
     echo "</pre>";
     exit;
 }
+
+
