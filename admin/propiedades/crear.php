@@ -2,6 +2,7 @@
 require '../../includes/app.php';
 
 use App\Propiedad;
+use Intervention\Image\ImageManagerStatic as Image;
 
 //Verifica si está autenticado
 estaAutenticado();
@@ -16,8 +17,6 @@ $resultado = mysqli_query($db, $consulta);
 //Arreglo con mensajes de errores
 $errores = Propiedad::getErrores();
 
-debuguear($errores);
-
 $titulo = '';
 $precio = '';
 $descripcion = '';
@@ -29,31 +28,40 @@ $vendedores_id = '';
 
 //Ejecuta el código después de que se envía el formulario
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+    
+    /** CREA UNA NUEVA INSTANCIA */
     $propiedad = new Propiedad($_POST);
 
+     /**SUBIDA DE ARCHIVOS **/
+    
+    //Generar nombre imagen
+    $nombreImagen = md5(uniqid(rand(), true) . ".jpg");
+
+    //Setear la imagen
+    //Realiza un resize a la imagen con intervention
+    if($_FILES['imagen']['tmp_name']) {
+        $image = Image::make($_FILES['imagen']['tmp_name'])->fit(800, 600);
+        $propiedad->setImagen($nombreImagen);
+    }
+    
+    //Validar
     $errores = $propiedad->validar();
 
     //Revisar que el array de errores esté vacío
     if(empty($errores)) {
-
-        $propiedad->guardar();
-
-        //Asignar files en una variable
-        $imagen = $_FILES['imagen'];
-        /**SUBIDA DE ARCHIVOS **/
-
-        //Crear carpeta
-        $carpetaImagenes = __DIR__ . '../../../imagenes/';
-
-        if(!is_dir($carpetaImagenes)) {
-            mkdir($carpetaImagenes);
+       
+        //Crear la carpeta para subir imagenes
+        if(!is_dir(CARPETA_IMAGENES)) {
+            mkdir(CARPETA_IMAGENES);
         }
-        //Generar nombre imagen
-        $nombreImagen = md5(uniqid(rand(), true) . ".jpg");
-        //Subir la imagen 
-        move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen . ".jpg" );
         
+        //Guarda la imagen en el servidor
+        $image->save(CARPETA_IMAGENES . $nombreImagen);
+
+        //Guarda en la base de datos
+        $resultado = $propiedad->guardar();
+        
+        //Mensaje de éxito
         if ($resultado) {
             //Redireccionar al usuario
             header("Location: /bienesraices/admin/index.php?resultado=1");
