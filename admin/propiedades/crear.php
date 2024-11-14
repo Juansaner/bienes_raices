@@ -35,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
      /**SUBIDA DE ARCHIVOS **/
     
     //Generar nombre imagen
-    $nombreImagen = md5(uniqid(rand(), true) . ".jpg");
+    $nombreImagen = md5(uniqid(rand(), true)). ".jpg";
 
     //Setear la imagen
     //Realiza un resize a la imagen con intervention
