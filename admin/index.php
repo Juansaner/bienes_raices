@@ -1,20 +1,13 @@
 <?php
 
-require '../includes/funciones.php';
+require '../includes/app.php';
+use App\Propiedad;
+
 //Verifica si está autenticado
-$auth = estaAutenticado();
+estaAutenticado();
 
-if(!$auth) {
-    header('Location: /bienesraices/index.php');
-}
-
-//Importar la conexión
-require '../includes/config/database.php';
-$db = conectarDB();
-//Escribir el query 
-$query = "SELECT * FROM propiedades";
-//Consultar la BD
-$resultadoConsulta = mysqli_query($db, $query);
+//Metodo para obtener todas las propiedades
+$propiedades = Propiedad::all();
 
 //Muestra mensaje condicional 
 $resultado = $_GET['resultado'] ?? null;
