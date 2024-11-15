@@ -24,4 +24,9 @@ function debuguear($variable) {
     exit;
 }
 
+// Escapar / sanitizar HTML
+function sanitizar($html) : string {
+    $sanitizar = htmlspecialchars($html);
+    return $sanitizar;
+}
 
