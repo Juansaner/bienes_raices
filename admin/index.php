@@ -62,21 +62,21 @@ incluirTemplate('header');
         </thead>
 
         <tbody> <!-- Mostrar los resultados -->
-            <?php while ($propiedad = mysqli_fetch_assoc($resultadoConsulta)): ?>
+            <?php foreach( $propiedades as $propiedad ): ?>
                 <tr>
-                    <td><?php echo $propiedad['id']; ?></td>
-                    <td><?php echo $propiedad['titulo']; ?></td>
-                    <td> <img src="/bienesraices/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"></td>
-                    <td>$<?php echo $propiedad['precio']; ?></td>
+                    <td><?php echo $propiedad->id; ?></td>
+                    <td><?php echo $propiedad->titulo; ?></td>
+                    <td> <img src="/bienesraices/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla"></td>
+                    <td>$<?php echo $propiedad->precio; ?></td>
                     <td>
-                        <a href="/bienesraices/admin/propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>" class="boton-verde-block">Actualizar</a>
+                        <a href="/bienesraices/admin/propiedades/actualizar.php?id=<?php echo $propiedad->id; ?>" class="boton-verde-block">Actualizar</a>
                         <form method="POST" class="w-100">
-                            <input type="hidden" name="id" value="<?php echo $propiedad['id']; ?>">
+                            <input type="hidden" name="id" value="<?php echo $propiedad->id; ?>">
                             <input type="submit" value="Eliminar" class="boton-rojo-block">
                         </form>
                     </td>
                 </tr>
-            <?php endwhile ?>
+            <?php endforeach ?>
         </tbody>
     </table>
 </main>
