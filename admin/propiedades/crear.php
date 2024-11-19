@@ -52,13 +52,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image->save(CARPETA_IMAGENES . $nombreImagen);
 
         //Guarda en la base de datos
-        $resultado = $propiedad->guardar();
-        
-        //Mensaje de éxito
-        if ($resultado) {
-            //Redireccionar al usuario
-            header("Location: /bienesraices/admin/index.php?resultado=1");
-        }
+        $propiedad->guardar(); 
     }
     
 }
