@@ -2,6 +2,7 @@
 
 require '../includes/app.php';
 use App\Propiedad;
+use App\Vendedor;
 
 //Verifica si está autenticado
 estaAutenticado();
@@ -9,6 +10,8 @@ estaAutenticado();
 //Metodo para obtener todas las propiedades
 $propiedades = Propiedad::all();
 $vendedores = Vendedor::all();
+
+debuguear($vendedores);
 
 //Muestra mensaje condicional 
 $resultado = $_GET['resultado'] ?? null;
