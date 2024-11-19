@@ -6,7 +6,8 @@ class ActiveRecord  {
     //Base de datos
     protected static $db;
     protected static $columnasDB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedores_id'];
-    
+    protected static $tabla = '';
+
     //Errores
     protected static $errores = [];
 
@@ -56,7 +57,7 @@ class ActiveRecord  {
         $atributos = $this->sanitizarAtributos();
 
         //Insertar en la base de datos
-        $query = "INSERT INTO propiedades ( ";
+        $query = "INSERT INTO " . static::$tabla . " ( ";
         $query .= join(', ', array_keys($atributos));
         $query .= " ) VALUES (' "; 
         $query .= join("', '", array_values($atributos));
@@ -81,7 +82,7 @@ class ActiveRecord  {
         }
 
         //Actualizar la base de datos
-        $query = "UPDATE propiedades SET ";
+        $query = "UPDATE " . static::$tabla ." SET ";
         $query .= join(', ', $valores);
         $query .= "WHERE id = '" . self::$db->escape_string($this->id) . "' ";
         $query .= "LIMIT 1 ";
@@ -96,8 +97,7 @@ class ActiveRecord  {
 
     //Eliminar un registro
     public function eliminar() {
-        //Eliminar la propiedad
-        $query = "DELETE FROM propiedades WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+        $query = "DELETE FROM " . static::$tabla . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
         $resultado = self::$db->query($query);
 
         if ($resultado) {
@@ -188,7 +188,7 @@ class ActiveRecord  {
 
     //Lista todas las propiedades
     public static function all() {
-        $query = "SELECT * FROM propiedades";
+        $query = "SELECT * FROM " . static::$tabla;
         
         //Pasa la consulta al método 
        $resultado = self::consultarSQL($query);
@@ -198,7 +198,7 @@ class ActiveRecord  {
 
     //Busca un registro por su ID
     public static function find($id) {
-        $query = "SELECT * FROM propiedades WHERE id = $id";
+        $query = "SELECT * FROM " . static::$tabla . " WHERE id = $id";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }

@@ -8,6 +8,7 @@ estaAutenticado();
 
 //Metodo para obtener todas las propiedades
 $propiedades = Propiedad::all();
+$vendedores = Vendedor::all();
 
 //Muestra mensaje condicional 
 $resultado = $_GET['resultado'] ?? null;
@@ -35,7 +36,7 @@ incluirTemplate('header');
     <?php elseif (intval($resultado)  === 2): ?>
         <p class="alerta exito"> Anuncio actualizado correctamente </p>
     <?php elseif (intval($resultado)  === 3): ?>
-        <p class="alerta exito"> Anuncio eliminadocorrectamente </p>
+        <p class="alerta exito"> Anuncio eliminado correctamente </p>
     <?php endif; ?>
     
     <a href="/bienesraices/admin/propiedades/crear.php" class="boton boton-azul">Nueva propiedad</a>
