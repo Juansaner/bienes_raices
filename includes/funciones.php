@@ -30,3 +30,10 @@ function sanitizar($html) : string {
     return $sanitizar;
 }
 
+//Validar tipo de contenido
+function validarTipoContenido($tipo) {
+    $tipos = ['propiedad', 'vendedor'];
+
+    return in_array($tipo, $tipos);
+}
+

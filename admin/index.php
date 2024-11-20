@@ -15,16 +15,28 @@ $vendedores = Vendedor::all();
 $resultado = $_GET['resultado'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $id = $_POST['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
-
+    
     if ($id) {
 
-        $propiedad = Propiedad::find($id);
+        $tipo = $_POST['tipo'];
+        
+        if(validarTipoContenido($tipo)){
 
-        $propiedad->eliminar();
+            //Compara lo que se va a eliminar
+            if($tipo === 'vendedor') {
+                $vendedor = Vendedor::find($id);
+                $vendedor->eliminar();
+            } else if($tipo === 'propiedad') {
+                $propiedad = Propiedad::find($id);
+                $propiedad->eliminar();
+            }
+        }
     }
 }
+
 
 //Incluye un template
 incluirTemplate('header');
@@ -65,6 +77,7 @@ incluirTemplate('header');
                         <a href="/bienesraices/admin/propiedades/actualizar.php?id=<?php echo $propiedad->id; ?>" class="boton-verde-block">Actualizar</a>
                         <form method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?php echo $propiedad->id; ?>">
+                            <input type="hidden" name="tipo" value="propiedad">
                             <input type="submit" value="Eliminar" class="boton-rojo-block">
                         </form>
                     </td>
@@ -94,6 +107,7 @@ incluirTemplate('header');
                         <a href="/bienesraices/admin/vendedores/actualizar.php?id=<?php echo $vendedor->id; ?>" class="boton-verde-block">Actualizar</a>
                         <form method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?php echo $vendedor->id; ?>">
+                            <input type="hidden" name="tipo" value="vendedor">
                             <input type="submit" value="Eliminar" class="boton-rojo-block">
                         </form>
                     </td>
