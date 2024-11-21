@@ -5,14 +5,37 @@ use App\Vendedor;
 
 estaAutenticado();
 
-$vendedor = new Vendedor;
+$id = $_GET['id'];
+$id = filter_var($id, FILTER_VALIDATE_INT);
+
+if(!$id) {
+    header('Location: /bienesraices/admin');
+}
+
+//Obtener los datos del vendedor
+$vendedor = Vendedor::find($id);
+debuguear($vendedor);
 
 //Arreglo con mensajes de errores
 $errores = Vendedor::getErrores();
 
-if(empty($errores)) {
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    //Asignar los valores
+    $args = $_POST['vendedor'];
+
+    //Sincronizar objeto en memoria con los que el usuario ingresó
+    $vendedor->sincronizar($args);
+
+    //Validar
+    $errores = $vendedor->validar();
+
+    if(empty($errores)) {
+        $vendedor->guardar();
+    }
 }
+
+
 
 incluirTemplate('header');
 
