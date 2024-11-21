@@ -1,6 +1,8 @@
 <?php
 
 require '../includes/app.php';
+
+//Importar las clases
 use App\Propiedad;
 use App\Vendedor;
 
@@ -16,16 +18,14 @@ $resultado = $_GET['resultado'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    //Validar id
     $id = $_POST['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
     
     if ($id) {
-
         $tipo = $_POST['tipo'];
-        
         if(validarTipoContenido($tipo)){
-
-            //Compara lo que se va a eliminar
+            //Compara lo que se va a eliminar (vendedor o propiedad)
             if($tipo === 'vendedor') {
                 $vendedor = Vendedor::find($id);
                 $vendedor->eliminar();
@@ -37,20 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-
 //Incluye un template
 incluirTemplate('header');
 ?>
 
 <main class="contenedor seccion">
     <h1>Administrador de bienes raíces</h1>
-    <?php if (intval($resultado)  === 1): ?>
-        <p class="alerta exito"> Creado correctamente </p>
-    <?php elseif (intval($resultado)  === 2): ?>
-        <p class="alerta exito"> Actualizado correctamente </p>
-    <?php elseif (intval($resultado)  === 3): ?>
-        <p class="alerta exito"> Eliminado correctamente </p>
-    <?php endif; ?>
+
+    <?php
+        $mensaje = mostrarNostificaciones( intval($resultado) );
+        if($mensaje) { ?>
+            <p class="alerta exito"> <?php echo sanitizar($mensaje) ?></p>
+        <?php } ?>
     
     <a href="/bienesraices/admin/propiedades/crear.php" class="boton boton-azul">Nueva propiedad</a>
     <a href="/bienesraices/admin/vendedores/crear.php" class="boton boton-azul">Nuevo vendedor</a>
