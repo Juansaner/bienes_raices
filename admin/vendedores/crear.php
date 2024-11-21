@@ -10,9 +10,19 @@ $vendedor = new Vendedor;
 //Arreglo con mensajes de errores
 $errores = Vendedor::getErrores();
 
-if(empty($errores)) {
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    //Crea un nueva instancia
+    $vendedor = new Vendedor($_POST['vendedor']);
+    
+    //Validar que no haya errores
+    $errores = $vendedor->validar();
+
+    if(empty($errores)) {
+        $vendedor->guardar();
+    }
 }
+
 
 incluirTemplate('header');
 
